@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="Developer_files/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.0/examples/album/ -->
+<!-- <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico"> -->
+
+    <!-- <title>Tupper</title> -->
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="./Album example for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="./Album example for Bootstrap_files/album.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/album.css">
+
+  </head> -->
+
+  <body>
+<div id="kasane">
+    <header>
+      <!-- <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="https://getbootstrap.com/docs/4.0/examples/album/#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="https://getbootstrap.com/docs/4.0/examples/album/#" class="text-white">Like on Facebook</a></li>
+                <li><a href="https://getbootstrap.com/docs/4.0/examples/album/#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="headfix">
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <p class="navbar-brand d-flex align-items-center">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg> -->
+            <strong><%= @name %></strong>さん、こんにちわ！</p>
+
+
+          <!-- <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"> -->
+          <a class="navbar-toggler" data-toggle="collapse" href='/myterro'>
+            自爆
+            <!-- <span class="navbar-toggler-icon"></span> -->
+          </a>
+          <a class="navbar-toggler" data-toggle="collapse" href='/logout'>
+            ログアウト
+            <!-- <span class="navbar-toggler-icon"></span> -->
+          </a>
+        </div>
+      </div>
+      </div
+    </header>
+
+    <main role="main">
+<div class="tubuyaki">
+      <p>&nbsp;</p>
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1>Tupper</h1>
+          <h6>俺の飯テロおすそ分け！</h6>
+          <hr>
+          <p>Tupperでは、飯テロを通じて美味しい食を広げます。<br>
+            （肥えても責任取れません）</p>
+
+          <div class="wrapper">
+            <div class="foo">
+            <form action="/create" method="post" enctype="multipart/form-data">
+              <div class="foo">
+              <!-- <label>食べ物名</label> -->
+              <input type="text" class="form-control" name="title" placeholder="食べ物名">
+            </div>
+            <div class="foo">
+              <!-- <label>語る</label> -->
+              <textarea class="form-control" name="description" placeholder="語る"></textarea><br>
+            </div>
+              <!-- <input class="form-control" type="text" placeholder="Readonly input here…" readonly=""> -->
+              <input type="file" name="file"><br>
+              <hr>
+              <!-- <div class="preview" /> -->
+              <button type="submit" class="btn btn-success btn">飯テロ</button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+
+          <div class="row">
+            <% @articles.each do |article| %>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+
+                <% if !article['file'].empty? %>
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
+                src="/image/<%= article['file'] %>" data-holder-rendered="true">
+                <% end %>
+
+                <div class="card-body">
+                  <h5><%= article['title'] %></h5><p>by&nbsp;<%= article['user_name'] %></p><br>
+                  <p class="card-text"><%= article['description'] %></p>
+
+
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+
+
+                      <a href="/view/<%= article['id'] %>">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" >View</button>
+                    </a>
+
+
+
+                      <% if article['user_name'] === @name %>
+                      <div onclick="return confirm('削除します。\nよろしいですか？');">
+
+
+                        <form action="/create_delete/<%= article['id'] %>" method="post" >
+                          <!-- <button type="delete" class="btn btn-sm btn-outline-secondary" > -->
+                          <input type="submit" name="_method" value="delete" class="btn btn-sm btn-outline-secondary">
+                          <!-- </button> -->
+                        </form>
+
+                    </div>
+                      <%end%>
+
+                    </div>
+                    <small class="text-muted"><%= article['created_at'] %></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+
+
+
+          </div>
+        </div>
+      </div>
+</div>
+    </main>
+
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <!-- <a href='/'><h1>TOP</h1></a> -->
+          <a href='/'>TOP</a>
+        </p>
+        <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="https://getbootstrap.com/docs/4.0/">Visit the homepage</a> or read our <a href="https://getbootstrap.com/docs/4.0/getting-started/">getting started guide</a>.</p>
+        <!-- <a href='/'>TOP</a> -->
+      </div>
+      </footer>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./Album example for Bootstrap_files/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="./Album example for Bootstrap_files/popper.min.js"></script>
+    <script src="./Album example for Bootstrap_files/bootstrap.min.js"></script>
+    <script src="./Album example for Bootstrap_files/holder.min.js"></script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="225" viewBox="0 0 288 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="14" style="font-weight:bold;font-size:14pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCUTYPE html>
+<html lang ="js">
+<head>
+  <title>Tupper</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="/js/app.js"></script>
+
+</head>
+
+<body>
+  <h1>Tupper</h1>
+  <p><%= @name %>でログイン</p>
+  <!-- <p><%= @id %></p> -->
+  <!--<p>Tupperでは、飯テロを通じて美味しい食を広げます（肥えても責任取れません）。</p>
+  <a href='/logout'>ログアウト</a>
+
+  <div class="wrapper">
+    <form action="/create" method="post" enctype="multipart/form-data">
+      <label>食べ物名</label><br>
+      <input type="text" class="form-control" name="title"><br>
+
+      <label>美味しさを表現しよう！</label><br>
+      <textarea class="form-control" name="description"></textarea><br>
+
+      <input type="file" name="file">
+
+
+      <button type="submit" class="btn btn-success btn">飯テロ</button>
+      <hr>
+      <div class="preview" />
+    </form>
+  </div>
+
+
+
+<!-- %= 見える　％見えない、処理描く時 -->
+<!--<% @articles.each do |article| %>
+
+<p> <%= article['title'] %>, <%= article['description'] %>, <%= article['created_at'] %>,<%= article['user_name'] %>だよ</p>
+
+<% if !article['file'].empty? %>
+ <img src="/image/<%= article['file'] %>" />
+ <%end%>
+
+<!-- 削除ボタン -->
+
+  <!-- <% if article['user_name'] === @name %>
+  <!-- この投稿がログインしているユーザーだったら、 ==文字が一致しているか ===型まで完全一致してるか -->
+  <!-- <div onclick="return confirm('削除します。\nよろしいですか？');">
+    <form action="/create_delete/<%= article['id'] %>" method="post">
+      <input type="submit" name="_method" value="delete">
+    </form></div> -->
+
+  <!-- <%end%>
+
+<% end %> -->
+
+
+
+
+</div>
+</body>
+
+</html>
